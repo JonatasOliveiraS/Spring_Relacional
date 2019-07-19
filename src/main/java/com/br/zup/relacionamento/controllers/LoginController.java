@@ -16,10 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.br.zup.relacionamento.models.LoginModel;
 import com.br.zup.relacionamento.models.UsuarioModel;
 import com.br.zup.relacionamento.services.LoginService;
-import com.br.zup.relacionamento.services.UsuarioService;
 
 @Controller
-public class RelacionamentoController {
+public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
@@ -29,25 +28,20 @@ public class RelacionamentoController {
 		return modelAndView;
 	}
 	@PostMapping("/cadastro/login")
-	public ModelAndView cadastrarLogin(@Valid UsuarioModel user, BindingResult bindingUser,@Valid LoginModel login , BindingResult bindingLogin) {
+	public ModelAndView cadastrarLogin(@Valid UsuarioModel user, BindingResult bindingUser, @Valid LoginModel login, BindingResult bindingLogin) {
 		ModelAndView modelAndView = new ModelAndView("cadastro.html");
 		if(bindingUser.hasErrors() || bindingLogin.hasErrors()) {
 			List<String> msgs = new ArrayList<String>();
-			
-			for(ObjectError objerro : bindingUser.getAllErrors()) {
+			for (ObjectError objerro : bindingUser.getAllErrors()) {
 				msgs.add(objerro.getDefaultMessage());
 			}
-			for(ObjectError objerro : bindingLogin.getAllErrors()) {
+			for (ObjectError objerro : bindingLogin.getAllErrors()) {
 				msgs.add(objerro.getDefaultMessage());
 			}
-			modelAndView.addObject("msgs" , msgs);
-			
+			modelAndView.addObject("msgs", msgs);
 		}else {
 			modelAndView.addObject("msgs", loginService.salvarLogin(user, login));
-			
 		}
 		return modelAndView;
-		
 	}
-
 }
