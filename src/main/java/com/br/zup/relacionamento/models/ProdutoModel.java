@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,11 +23,14 @@ public class ProdutoModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@NotBlank(message = "Nome é obrigatório")
 	@NotNull
 	private String nome;
-	@DecimalMin(value = "0.1", message = "Valor inválido")
+	
+	@DecimalMin(value = "0.5", message = "Valor inválido")
 	private double valor;
+	
 	@NotBlank(message = "Validade é obrigatório")
 	@NotNull
 	private String validade;
@@ -34,12 +38,23 @@ public class ProdutoModel implements Serializable{
 	@ManyToMany
 	@JoinColumn(name = "categoria_id")
 	private List<CategoriaModel> categorias = new ArrayList<CategoriaModel>();
+	
+	@ManyToOne
+	private PedidoModel pedido;
 
 	public ProdutoModel() {
 	}
 
 	public Integer getId() {
 		return id;
+	}
+
+	public PedidoModel getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(PedidoModel pedido) {
+		this.pedido = pedido;
 	}
 
 	public void setId(Integer id) {

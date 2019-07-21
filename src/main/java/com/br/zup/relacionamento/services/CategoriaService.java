@@ -10,7 +10,7 @@ import com.br.zup.relacionamento.repositories.CategoriaRepository;
 @Service
 public class CategoriaService {
 	@Autowired
-	CategoriaRepository categoriaRepository;
+	private CategoriaRepository categoriaRepository;
 	
 	public String salvarCategoria(CategoriaModel category) {
 		categoriaRepository.save(category);

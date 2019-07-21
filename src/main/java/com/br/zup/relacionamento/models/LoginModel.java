@@ -22,6 +22,7 @@ public class LoginModel implements Serializable{
 	@NotBlank(message = "Apelido não pode ficar em branco")
 	@Size(min = 4, message = "Apelido tem que ter 4 caracteres")
 	private String apelido;
+	
 	@NotBlank(message = "Senha não pode ficar em branco")
 	@Size(min = 8, message = "Senha tem que ter no mínimo 8 letras")
 	private String senha;

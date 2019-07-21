@@ -18,6 +18,7 @@ public class CategoriaModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@NotBlank(message = "Nome da categoria obrigatório")
 	private String nome;
 	

@@ -1,11 +1,13 @@
 package com.br.zup.relacionamento.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -22,15 +24,20 @@ public class UsuarioModel implements Serializable{
 	@NotBlank(message = "Nome não pode ficar em branco")
 	@Size(min = 2, message = "Nome tem que ter no mínimo 2 letras")
 	private String nome;
+	
 	@NotBlank(message = "SobreNome não pode ficar em branco")
 	@Size(min = 2, message = "SobreNome tem que ter no mínimo 4 letras")
 	private String sobrenome;
+	
 	@NotBlank(message = "Email não pode ficar em branco")
 	@Email(message = "E-mail inválido")
 	private String email;
 	
 	@OneToOne(mappedBy = "usuario")
 	private LoginModel login;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<PedidoModel> pedido;
 	
 	
 	public UsuarioModel() {
@@ -55,6 +62,22 @@ public class UsuarioModel implements Serializable{
 
 	public String getSobreNome() {
 		return sobrenome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public List<PedidoModel> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<PedidoModel> pedido) {
+		this.pedido = pedido;
 	}
 
 	public void setSobreNome(String sobreNome) {
